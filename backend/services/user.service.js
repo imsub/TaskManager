@@ -1,5 +1,5 @@
 const { User } = require("../models");
-const httpStatus = require("http-status");
+const { status } = require("http-status");
 const ApiError = require("../utils/ApiError");
 const bcrypt = require("bcryptjs");
 
@@ -27,7 +27,7 @@ const getUserByEmail = async(email) =>{
         const data = await User.findOne({email:email});
         return data;
       }catch(error){
-        throw ApiError(httpStatus.NOT_FOUND, error)
+        throw ApiError(status.NOT_FOUND, error)
       }
 }
 // TODO: CRIO_TASK_MODULE_UNDERSTANDING_BASICS - Implement createUser(user)
@@ -56,16 +56,16 @@ const getUserByEmail = async(email) =>{
 const createUser = async(payload)=>{
     let res = await User.isEmailTaken(payload.email);
     if(res){
-        throw new ApiError(httpStatus.OK,"Email already taken");
+        throw new ApiError(status.OK,"Email already taken");
     }
     if(!payload.email){
-      throw new ApiError(httpStatus.BAD_REQUEST,"Email is not allowed to be empty");
+      throw new ApiError(status.BAD_REQUEST,"Email is not allowed to be empty");
     }
     if(!payload.name){
-      throw new ApiError(httpStatus.BAD_REQUEST,"Name field is required");
+      throw new ApiError(status.BAD_REQUEST,"Name field is required");
     }
     if(!payload.password){
-      throw new ApiError(httpStatus.BAD_REQUEST,"Password field is required");
+      throw new ApiError(status.BAD_REQUEST,"Password field is required");
     }
     //const salt = await bcrypt.getSalt();
     const hashedPassword = await bcrypt.hash(payload.password,10);

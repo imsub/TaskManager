@@ -1,4 +1,4 @@
-const httpStatus = require("http-status");
+const { status } = require("http-status");
 const config = require("../config/config");
 const ApiError = require("../utils/ApiError");
 

@@ -10,7 +10,7 @@ mongoose.connect(config.mongoose.url,config.mongoose.options).then(()=>{
         console.log("App is up and running",config.port);
         //console.log(server);
     })
-}).catch(error => console.log("Failed to connect to DB",error));
-// app.get('/', (req, res) => {
-//     res.send('Hello World!')
-//   })
+}).catch(error => {
+    console.log("Failed to connect to DB",error);
+    process.exit(1); // Exit if DB connection fails
+});

@@ -1,5 +1,5 @@
 const Joi = require("joi");
-const httpStatus = require("http-status");
+const { status } = require("http-status");
 const pick = require("../utils/pick");
 const ApiError = require("../utils/ApiError");
 
@@ -12,7 +12,7 @@ const validate = (schema) => (req, res, next) => {
   if (Object.keys(req.body).length !== 0 && !req.is("application/json")) {
     return next(
       new ApiError(
-        httpStatus.UNSUPPORTED_MEDIA_TYPE,
+        status.UNSUPPORTED_MEDIA_TYPE,
         "Supports JSON request body only"
       )
     );
@@ -34,7 +34,7 @@ const validate = (schema) => (req, res, next) => {
     const errorMessage = error.details
       .map((details) => details.message)
       .join(", ");
-    return next(new ApiError(httpStatus.BAD_REQUEST, errorMessage));
+    return next(new ApiError(status.BAD_REQUEST, errorMessage));
   }
 
   // Update validated fields in request with returned value

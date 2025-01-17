@@ -1,5 +1,5 @@
 const passport = require("passport");
-const httpStatus = require("http-status");
+const { status } = require("http-status");
 const ApiError = require("../utils/ApiError");
 const jwt = require("jsonwebtoken");
 const config = require("../config/config");
@@ -15,7 +15,7 @@ const config = require("../config/config");
  */
 const verifyCallback = (req, resolve, reject) => async (err, user, info) => {
   if (err || !user || info) {
-    return reject(new ApiError(httpStatus.UNAUTHORIZED, "Please Authenticate"));
+    return reject(new ApiError(status.UNAUTHORIZED, "Please Authenticate"));
   }
   req.user =  user;
   resolve();

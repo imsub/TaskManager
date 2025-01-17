@@ -1,4 +1,4 @@
-const httpStatus = require("http-status");
+const { status } = require("http-status");
 const ApiError = require("../utils/ApiError");
 const catchAsync = require("../utils/catchAsync");
 const { userService } = require("../services");
@@ -74,7 +74,7 @@ const getUser = catchAsync(async (req, res) => {
       }
     //}
   // }catch(error){
-  //   throw new ApiError(httpStatus.BAD_REQUEST,"User not found");
+  //   throw new ApiError(status.BAD_REQUEST,"User not found");
   // }
 });
 
@@ -84,11 +84,11 @@ const setAddress = catchAsync(async (req, res) => {
   const user = await userService.getUserById(req.params.userId);
 
   if (!user) {
-    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+    throw new ApiError(status.NOT_FOUND, "User not found");
   }
   if (user.email != req.user.email) {
     throw new ApiError(
-      httpStatus.FORBIDDEN,
+      status.FORBIDDEN,
       "User not authorized to access this resource"
     );
   }
