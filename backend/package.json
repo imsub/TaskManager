@@ -4,6 +4,7 @@
   "description": "Design and implement a web-based Collaborative Task Management System that allows",
   "main": "create, assign, and manage tasks within projects.",
   "scripts": {
+    "start": "node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +18,18 @@
   },
   "homepage": "https://github.com/imsub/TaskManager#readme",
   "dependencies": {
-    "express": "^4.21.2"
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.7.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "helmet": "^8.0.0",
+    "http-status": "^2.1.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "validator": "^13.12.0"
   }
 }

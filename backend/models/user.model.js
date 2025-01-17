@@ -3,9 +3,8 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const config = require("../config/config");
 const ApiError = require("../utils/ApiError");
-// TODO: CRIO_TASK_MODULE_UNDERSTANDING_BASICS - Complete userSchema, a Mongoose schema for "users" collection
 const bcrypt = require("bcryptjs");
-const userSchema = mongoose.Schema(
+const users = mongoose.Schema(
   {
     name: {
       type: String,
@@ -32,15 +31,6 @@ const userSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
-    walletMoney: { 
-      type: Number,
-      required: true,
-      default: 500,
-    },
-    address: {
-      type: String,
-      default: config.default_address,
-    },
   },
   // Create createdAt and updatedAt fields automatically
   {
@@ -54,14 +44,9 @@ const userSchema = mongoose.Schema(
  * @param {string} email - The user's email
  * @returns {Promise<boolean>}
  */
-userSchema.statics.isEmailTaken = async function (email) {
-  //try{
-    const data = await mongoose.model("User",userSchema).findOne({email:email});
+users.statics.isEmailTaken = async function (email) {
+    const data = await mongoose.model("User",users).findOne({email:email});
     return !!data;
-  // }catch(error){
-  //   throw ApiError("Use already exists: ", error)
-  // }
-  
 };
 
 /**
@@ -69,28 +54,14 @@ userSchema.statics.isEmailTaken = async function (email) {
  * @param {string} password
  * @returns {Promise<boolean>}
  */
- userSchema.methods.isPasswordMatch = async function (password) {
-    const user = this;
-    return bcrypt.compare(password,user.password);
-  };
-  
-  
-  
-  // TODO: CRIO_TASK_MODULE_UNDERSTANDING_BASICS
-
-
-
-/**
- * Check if user have set an address other than the default address
- * - should return true if user has set an address other than default address
- * - should return false if user's address is the default address
- *
- * @returns {Promise<boolean>}
- */
-userSchema.methods.hasSetNonDefaultAddress = async function () {
+users.methods.isPasswordMatch = async function (password) {
   const user = this;
-   return user.address !== config.default_address;
+  return bcrypt.compare(password,user.password);
 };
+  
+
+
+
 
 /*
  * Create a Mongoose model out of userSchema and export the model as "User"
@@ -100,5 +71,5 @@ userSchema.methods.hasSetNonDefaultAddress = async function () {
 /**
  * @typedef User
  */
-const User = mongoose.model("User",userSchema);
+const User = mongoose.model("User",users);
 module.exports={ User};
