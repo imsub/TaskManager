@@ -1,0 +1,22 @@
+{
+  "name": "taskmanager",
+  "version": "1.0.0",
+  "description": "Design and implement a web-based Collaborative Task Management System that allows",
+  "main": "create, assign, and manage tasks within projects.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imsub/TaskManager.git"
+  },
+  "author": "subham jalan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imsub/TaskManager/issues"
+  },
+  "homepage": "https://github.com/imsub/TaskManager#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
