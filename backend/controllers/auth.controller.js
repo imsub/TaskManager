@@ -39,7 +39,7 @@ const register = catchAsync(async (req, res) => {
     const user = await userService.createUser(req.body);
     //const token = tokenService.generateToken(newUser._id.toJSON(),accessTokenExpires,tokenTypes.ACCESS);
     const token = await tokenService.generateAuthTokens(user);
-    res.status(status.CREATED).json({user:user,tokens:token});
+    res.status(status.CREATED).json({user:user,tokens:token,success:true});
   //}catch(error){
     //res.status(status.UNAUTHORIZED).send({error});
   //}
@@ -78,7 +78,7 @@ const login = catchAsync(async (req, res) => {
   const {email , password} = req.body;
   const user = await authService.loginUserWithEmailAndPassword(email,password);
   const tokens = await tokenService.generateAuthTokens(user);
-  res.send({user,tokens});
+  res.send({user,tokens,success:true});
 });
 
 module.exports = {

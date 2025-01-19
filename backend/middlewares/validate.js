@@ -18,10 +18,9 @@ const validate = (schema) => (req, res, next) => {
     );
   }
 
-  // cherry-pick from the input schema ["params", "query", "body"] fields
+
   const validSchema = pick(schema, ["params", "query", "body"]);
 
-  // cherry-pick from the request object ["params", "query", "body"] fields
   const object = pick(req, Object.keys(validSchema));
 
   // Compile schema to Joi schema object and validate the request object
@@ -34,6 +33,7 @@ const validate = (schema) => (req, res, next) => {
     const errorMessage = error.details
       .map((details) => details.message)
       .join(", ");
+    //return next(res.status(status.BAD_REQUEST).send(errorMessage));
     return next(new ApiError(status.BAD_REQUEST, errorMessage));
   }
 
