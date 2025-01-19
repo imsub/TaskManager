@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 const app = require("./app");
 const config = require("./config/config");
-// import {mongoose} from "mongoose";
-// import app from "./app";
-// import {config} from "./config/config";
-
 let server;
 
 mongoose.connect(config.mongoose.url,config.mongoose.options).then(()=>{

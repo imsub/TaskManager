@@ -1,9 +1,6 @@
 const dotenv = require('dotenv');
 const path = require('path');
 const Joi = require('joi');
-// import {dotenv} from "dotenv";
-// import {path} from "path";
-// import {Joi} from "joi";
 const DEFAULT_WALLET_MONEY = 500;
 const DEFAULT_PAYMENT_OPTION = "PAYMENT_OPTION_DEFAULT";
 const DEFAULT_ADDRESSS = "ADDRESS_NOT_SET";

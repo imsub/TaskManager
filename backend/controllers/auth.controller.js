@@ -5,75 +5,15 @@ const config = require("../config/config");
 const accessTokenExpires =
   Math.floor(Date.now() / 1000) + config.jwt.accessExpirationMinutes * 60;
 const { tokenTypes } = require("../config/tokens");
-/**
- * Perform the following steps:
- * -  Call the userService to create a new user
- * -  Generate auth tokens for the user
- * -  Send back
- * --- "201 Created" status code
- * --- response in the given format
- *
- * Example response:
- *
- * {
- *  "user": {
- *      "_id": "5f71b31888ba6b128ba16205",
- *      "name": "crio-user",
- *      "email": "crio-user@gmail.com",
- *      "password": "$2a$08$bzJ999eS9JLJFLj/oB4he.0UdXxcwf0WS5lbgxFKgFYtA5vV9I3vC",
- *      "createdAt": "2020-09-28T09:55:36.358Z",
- *      "updatedAt": "2020-09-28T09:55:36.358Z",
- *      "__v": 0
- *  },
- *  "tokens": {
- *      "access": {
- *          "token": "eyJhbGciOiJIUz....",
- *          "expires": "2020-10-22T09:29:01.745Z"
- *      }
- *  }
- *}(userId, expires, type, secret = config.jwt.secret)
- *
- */
+
 const register = catchAsync(async (req, res) => {
-  //try{
     const user = await userService.createUser(req.body);
     //const token = tokenService.generateToken(newUser._id.toJSON(),accessTokenExpires,tokenTypes.ACCESS);
     const token = await tokenService.generateAuthTokens(user);
     res.status(status.CREATED).json({user:user,tokens:token,success:true});
-  //}catch(error){
-    //res.status(status.UNAUTHORIZED).send({error});
-  //}
 });
 
-/**
- * Perform the following steps:
- * -  Call the authservice to verify is password and email is valid
- * -  Generate auth tokens
- * -  Send back
- * --- "200 OK" status code
- * --- response in the given format
- *
- * Example response:
- *
- * {
- *  "user": {
- *      "_id": "5f71b31888ba6b128ba16205",
- *      "name": "crio-user",
- *      "email": "crio-user@gmail.com",
- *      "password": "$2a$08$bzJ999eS9JLJFLj/oB4he.0UdXxcwf0WS5lbgxFKgFYtA5vV9I3vC",
- *      "createdAt": "2020-09-28T09:55:36.358Z",
- *      "updatedAt": "2020-09-28T09:55:36.358Z",
- *      "__v": 0
- *  },
- *  "tokens": {
- *      "access": {
- *          "token": "eyJhbGciOiJIUz....",
- *          "expires": "2020-10-22T09:29:01.745Z"
- *      }
- *  }
- *}
- *
- */
+
 const login = catchAsync(async (req, res) => {
   const {email , password} = req.body;
   const user = await authService.loginUserWithEmailAndPassword(email,password);

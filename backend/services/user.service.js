@@ -3,7 +3,6 @@ const { status } = require("http-status");
 const ApiError = require("../utils/ApiError");
 const bcrypt = require("bcryptjs");
 
-// TODO: CRIO_TASK_MODULE_UNDERSTANDING_BASICS - Implement getUserById(id)
 /**
  * Get User by id
  * - Fetch user object from Mongo using the "_id" field and return user object
@@ -14,7 +13,7 @@ const getUserById = async (id) =>{
     const data = await User.findById(id);
     return data;
 }
-// TODO: CRIO_TASK_MODULE_UNDERSTANDING_BASICS - Implement getUserByEmail(email)
+
 
 /**
  * Get user by email
@@ -30,7 +29,7 @@ const getUserByEmail = async(email) =>{
         throw ApiError(status.NOT_FOUND, error)
       }
 }
-// TODO: CRIO_TASK_MODULE_UNDERSTANDING_BASICS - Implement createUser(user)
+
 
 /**
  * Create a user
@@ -74,7 +73,7 @@ const createUser = async(payload)=>{
 }
 
 
-// TODO: CRIO_TASK_MODULE_CART - Implement getUserAddressById()
+
 /**
  * Get subset of user's data by id
  * - Should fetch from Mongo only the email and address fields for the user apart from the id
